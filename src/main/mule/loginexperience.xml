@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="aphinFlow" doc:id="9a41fe9c-d3d3-451e-80c9-8b75dc1e75e1" >
+		<http:listener doc:name="Listener" doc:id="fb3ff935-66f1-4e3a-80a8-ab7c2643650b" config-ref="HTTP_Listener_config" path="/aphin">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:load-static-resource doc:name="loadAphinLoginPage" doc:id="06063309-8591-4d93-9868-cbc32f383ce6" resourceBasePath="${app.home}/aphin.html"/>
+	</flow>
+	<flow name="buniyaminFlow" doc:id="0036c074-7dca-438e-abf4-7c0f925eb042" >
+		<http:listener doc:name="Listener" doc:id="a20ee0fc-58f7-4775-8b59-4a48d95eea8d" config-ref="HTTP_Listener_config" path="/buniyamin">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:load-static-resource doc:name="loadBuniyaminLoginPage" doc:id="3e3a481f-133e-45b7-bf65-ad3f521a6e5e" resourceBasePath="${app.home}/buniyamin.html"/>
+	</flow>
+	<flow name="aswinFlow" doc:id="0d580685-cf05-42ff-824f-eee3c3727392" >
+		<http:listener doc:name="Listener" doc:id="6e333eb7-1f73-4a10-9680-ba5e6072184d" config-ref="HTTP_Listener_config" path="/aswin">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:load-static-resource doc:name="loadAswinLoginPage" doc:id="390adcdc-e8c6-4b05-9ea1-0ad9607b2908" resourceBasePath="${app.home}/aswin.html"/>
+	</flow>
+	<flow name="homeFlow" doc:id="6ceb8ece-cefd-4efa-9404-16daf078534c" >
+		<http:listener doc:name="Listener" doc:id="d15df71b-43df-4dcd-b935-8954d93931e9" config-ref="HTTP_Listener_config" path="/home">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:load-static-resource doc:name="loadHomePage" doc:id="4c484e95-344d-4075-8eeb-b8931cbac673" resourceBasePath="${app.home}/home.html"/>
+	</flow>
+	<flow name="logfordateFlow" doc:id="cb18b3e9-6d92-4042-b61b-52be6c803ca1" >
+		<http:listener doc:name="Listener" doc:id="88b4127c-6471-447a-b822-73642e375d1e" config-ref="HTTP_Listener_config" path="/logfordate">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:load-static-resource doc:name="loadLogForDate" doc:id="9e1de425-2e91-4527-8cf4-a88b281bdb6f" resourceBasePath="${app.home}/getByDate.html"/>
+	</flow>
+	<flow name="getStatusFlow" doc:id="392c20a4-46ef-4dc6-90ad-ee11f58857eb" >
+		<http:listener doc:name="Listener" doc:id="3aaac9d6-a91d-49ff-8503-7aed92f39420" config-ref="HTTP_Listener_config" path="/getstatus">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:load-static-resource doc:name="loadStatusPage" doc:id="be58c0d6-dbbd-4f26-9e62-d54f9929dd42" resourceBasePath="${app.home}/getstatus.html"/>
+	</flow>
+	<flow name="timesheetFlow" doc:id="76fcc3fc-488a-4cbe-ae36-27618cafa2d2" >
+		<http:listener doc:name="Listener" doc:id="68564ae8-e31b-49fc-b3cd-c8f35ea99fad" config-ref="HTTP_Listener_config" path="/timesheet"/>
+		<http:load-static-resource doc:name="loadTimesheetPage" doc:id="aca2ee40-c4ab-478b-b391-72feafb75032" resourceBasePath="${app.home}/timesheet.html"/>
+	</flow>
+</mule>

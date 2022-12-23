@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="LoggingFlow" doc:id="4ef0fe38-6720-4637-a9f4-e8900bdf6ab8" >
+		<http:listener doc:name="Listener" doc:id="c50de560-b5b7-4df9-8b7e-7bf88de34cc3" config-ref="HTTP_Listener_config" path="/logging">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<ee:transform doc:name="loggingPayload" doc:id="167d1000-1355-4a27-a8e0-bc1343832885" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<http:request method="POST" doc:name="requestToPapi" doc:id="a9853b58-195b-43a0-bab2-3b29c81a066b" path="/api/logging" config-ref="HTTP_Request_to_papi">
+			<http:headers ><![CDATA[#[{
+	client_id: "123",
+	client_secret: "123"
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[{
+	action: payload.action
+}]]]></http:query-params>
+		</http:request>
+	</flow>
+	<flow name="updateFlow" doc:id="89bb7cc6-ffd4-417a-ae49-87f6ad1aee09" >
+		<http:listener doc:name="Listener" doc:id="d4c46167-7e47-4472-8329-ee9cb7655f21" config-ref="HTTP_Listener_config" path="/update">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:request method="GET" doc:name="requestToPapi" doc:id="7a215e6e-9727-42c9-98c6-d1e76a94c056" path="/api/update" config-ref="HTTP_Request_to_papi">
+			<http:headers ><![CDATA[#[{
+	client_id: "1234",
+	client_secret: "1234"
+}]]]></http:headers>
+		</http:request>
+	</flow>
+	<flow name="getlogFlow" doc:id="9f68549d-320e-4c97-9311-757c0d7c1430" >
+		<http:listener doc:name="Listener" doc:id="3d9a6a8d-aae0-452d-a06e-2e3cc0840a45" config-ref="HTTP_Listener_config" path="/log">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:request method="GET" doc:name="requestToPapi" doc:id="f0daac83-c3f9-4f54-a3be-9f1921da2cfd" path="/api/log" config-ref="HTTP_Request_to_papi">
+			<http:headers ><![CDATA[#[{
+	client_id: "1234",
+	client_secret: "1234"
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[{
+	name: attributes.queryParams.name,
+	month: attributes.queryParams.month
+}]]]></http:query-params>
+		</http:request>
+	</flow>
+	<flow name="getbydateFlow" doc:id="44320109-d8e6-4d45-bb18-a5ecbb208833" >
+		<http:listener doc:name="Listener" doc:id="ed5c60a9-9c70-44b4-b3e0-b41d1cfdab46" config-ref="HTTP_Listener_config" path="/getbydate">
+			<http:error-response >
+				<http:body ><![CDATA[#[payload]]]></http:body>
+			</http:error-response>
+		</http:listener>
+		<http:request method="GET" doc:name="requestToPapi" doc:id="a05fce9e-fa46-4de1-a7cc-95c71377b870" path="/api/getbydate" config-ref="HTTP_Request_to_papi">
+			<http:headers ><![CDATA[#[{
+	client_id: "1234",
+	client_secret: "1234"
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[{
+	date: attributes.queryParams.date
+}]]]></http:query-params>
+		</http:request>
+	</flow>
+</mule>

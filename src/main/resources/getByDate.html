@@ -1,0 +1,44 @@
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=date] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+
+</style>
+</head>
+<body>
+
+<h2>Get Log for a date</h2>
+
+<form action="http://localhost:8083/getbydate">
+  <label for="name"><b>Select date</b></label>
+   <label for="date"></label>
+  <input type="date" id="date" name="date">
+ <input type="submit" value="Submit">
+  </form>
+ 
+
+</body>
+</html>
